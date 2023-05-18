@@ -1,0 +1,52 @@
+*** install from   Helm site 
+wget https://get.helm.sh/helm-v3.4.1-linux-amd64.tar.gz
+tar xvf helm-v3.4.1-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin
+rm helm-v3.4.1-linux-amd64.tar.gz
+rm -rf linux-amd64
+helm version
+
+--------------------
+*** Step 1:  install from git
+--------------------
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+sudo ./get_helm.sh
+helm version
+
+-------------------------------------
+*** Step 2: Add Helm Chart repository
+-------------------------------------
+helm repo add stable https://charts.helm.sh/stable  * Add official charts repository
+helm repo add bitnami https://charts.bitnami.com/bitnami  * Add bitnami repository
+helm search repo stable  * Listing chart in stable repo
+
+----------------------------------------------
+*** Step 3: Install Applications on Helm Chart
+----------------------------------------------
+kubectl config get-contexts   * Confirm that your Kubernetes CLI is using the right cluster context 
+kubectl config use-context k3s   * Switch to desired context
+helm repo update
+helm show chart stable/nginx-ingress   * Get chart features
+helm install nginx-ingress stable/nginx-ingress   * Install the chart
+helm ls
+helm uninstall nginx-ingress
+helm install dokuwiki stable/dokuwiki
+
+*** install mongoDB
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm install —name my-mongo-release stable/mongodb-replicaset
+or
+git clone git@github.com:helm/charts.git
+helm install esome-mongo charts/stable/mongodb-replicaset
+
+*** install mysql
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-release bitnami/mysql
+
+
+************
+eyJhbGciOiJSUzI1NiIsImtpZCI6IjMtWGYtUzBSMk9qUzlSN19oNVRpMlc5Q2Rjc01iV3Y1NUhvR1ptYTFMVkkifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkZXBsb3ltZW50LWNvbnRyb2xsZXItdG9rZW4tdmZtejQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVwbG95bWVudC1jb250cm9sbGVyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNjQ5ZTZhN2EtMGU2Yi00YWNhLWJjN2EtYWJkMmIzZWFmOWI1Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRlcGxveW1lbnQtY29udHJvbGxlciJ9.HYvtOB8KdhQzRugz-_nIcD9zNAPmXY9-owPaxl1Ual4GFq1khGQbyPNi65df-7ev0XvWvvjdkZpwXRkEdSu5ekyV7JzMkReByHfQLb8eJgApXtnLdl1kG_Elupq3-E1ot0t9_gzO14Oyj1X_g92TlVu_GQSqQKQRO-phZR_xN4xPp0XNhHVKbgpdGdbLICzhXJcWPFmRPvjJDQkOUICgv2xf_4dWAU0UR4yPvqMizh8iVKxlx63-rwNZOQ8jl-xeOsWGa75Up31p-ssx_AW0rdewP5E5fcidg3X9NFKDowHKrQnJQsq9hpE6iUOqM-5NAQKe5JjYpchd2tG-gNCYLg
+
+
+

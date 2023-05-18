@@ -1,0 +1,6 @@
+
+MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default my-release-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
+
+client:
+kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
+mysql -h my-release-mysql -p
